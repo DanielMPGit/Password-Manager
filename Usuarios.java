@@ -5,16 +5,18 @@ import java.util.Scanner;
 public class Usuarios {
     protected String nombre;
     protected String contraseña;
+    protected String hashContraseña;
     protected static ArrayList<Contraseñas> contraseñas;
     static Scanner input = new Scanner(System.in);
     
     public Usuarios(String nombre, String contraseña){
         this.nombre = nombre;
         this.contraseña = contraseña;
+        this.hashContraseña = Utilidades.hashear(contraseña);
         this.contraseñas = new ArrayList<>();
     }
 
-    public String gerNombre(){
+    public String getNombre(){
         return this.nombre;
     }
     public String getContraseña(){
@@ -22,6 +24,10 @@ public class Usuarios {
     }
     public ArrayList<Contraseñas> getContraseñas(){
         return this.contraseñas;
+    }
+    
+    public Contraseñas getContraseñaArray(int num){
+        return contraseñas.get(num);
     }
 
     public void setNombre(String nombre){
@@ -38,10 +44,10 @@ public class Usuarios {
         this.contraseñas.remove(posicionContraseña);
     }
     
-    public static void crearContraseña(){
+    public static void crearContraseña(String passwordMaestra) {
         System.out.print("Nombre: ");
         String nombre = input.nextLine();
-        contraseñas.add(new Contraseñas(nombre, Utilidades.generarContraseña(32)));
+        contraseñas.add(new Contraseñas(nombre, Utilidades.generarContraseña(32, passwordMaestra)));
     }
 
     @Override

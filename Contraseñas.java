@@ -24,9 +24,8 @@ public class Contraseñas {
         this.contraseña = contraseña;
     }
 
-    @Override
-    public String toString() {
-        return "Nombre: " + nombre_servicio + "\nContraseña: " + contraseña;
+    public String toString(String passwordMaestra) {
+        return "Nombre: " + nombre_servicio + "\nContraseña: " + Utilidades.Desencriptar(contraseña, passwordMaestra);
     }
     
     
